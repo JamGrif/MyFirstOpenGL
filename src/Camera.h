@@ -118,7 +118,7 @@ public:
             this->zoom -= yOffset;
         }
 
-        if (this->zoom <= 1.0f) 
+        if (this->zoom <= 1.0f)
         {
             this->zoom = 1.0f;
         }
@@ -132,6 +132,11 @@ public:
     GLfloat GetZoom() 
     {
         return this->zoom;
+    }
+
+    glm::vec3 GetPosition()
+    {
+        return this->position;
     }
 
 private:

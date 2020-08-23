@@ -41,7 +41,7 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
-glm::vec3 cubePos(0.0f, 0.0f, 0.0f);
+//glm::vec3 cubePos(0.0f, 0.0f, 0.0f);
 //Position of the source of light in world
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
@@ -114,65 +114,71 @@ int main()
 	// Set up our vertex data (and buffer(s)) and attribute pointers
 	GLfloat vertices[] =
 	{
-		-0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
+		//Position			  //Normal
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-		-0.5f, -0.5f,  0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
+		0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-		-0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,
-		0.5f, -0.5f,  0.5f,
-		0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-		-0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f, -0.5f,
-		0.5f,  0.5f,  0.5f,
-		0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
 
 	GLuint VBO; //Vertex Buffer Object
-	GLuint boxVAO; //Vertex Array Object
+	GLuint containerVAO; //Vertex Array Object
 
-	glGenVertexArrays(1, &boxVAO);
+	glGenVertexArrays(1, &containerVAO);
 	glGenBuffers(1, &VBO);
 
 	//Bind vertex array first
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindVertexArray(boxVAO);
+	glBindVertexArray(containerVAO);
 
 	//Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
-	glBindVertexArray(0); //Unbind VAO
+	//glBindVertexArray(0); //Unbind VAO
+
+	//Normal attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	glBindVertexArray(0);
 
 	//Set lights VAO
 	GLuint lightVAO;
@@ -182,7 +188,7 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	//Set vertex attributes (only position data for the lamp)
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 
@@ -192,7 +198,10 @@ int main()
 	projection = glm::perspective(camera.GetZoom(), (GLfloat)SCREEN_WIDTH / (GLfloat)SCREEN_HEIGHT, 0.1f, 100.0f);
 
 	float x = 0;
+	float x2 = 0;
 	bool MoveForward = true;
+	bool MoveForward2 = false;
+
 	//Game loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -206,21 +215,41 @@ int main()
 		DoMovement();
 
 		//Clear the colourbuffer
-		glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Clear out window, ready to draw next frame
 
 		lightingShader.Use();
-		GLuint objectColorLoc = glGetUniformLocation(lightingShader.Program, "objectColor");
-		GLuint lightColorLoc = glGetUniformLocation(lightingShader.Program, "lightColor");
+		GLint objectColorLoc = glGetUniformLocation( lightingShader.Program, "objectColor" );
+        GLint lightColorLoc = glGetUniformLocation( lightingShader.Program, "lightColor" );
+        GLint lightPosLoc = glGetUniformLocation( lightingShader.Program, "lightPos" );
+        GLint viewPosLoc = glGetUniformLocation( lightingShader.Program, "viewPos" );
 
 		//Uniforming the objects colour location
-		glUniform3f(objectColorLoc, 0.4f, 0.5f, 0.1f);
-		glUniform3f(lightColorLoc, 0.2f, 0.2f, 0.5f);
+		glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
+		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+		glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
+
 
 		//Create transformations
 		glm::mat4 view = glm::mat4(1.0f);
 		view = camera.GetViewMatrix();
 
+		/*if (MoveForward2)
+		{
+			x2 += 3.0f * deltaTime;
+		}
+		else
+		{
+			x2 -= 3.0f * deltaTime;
+		}
+
+		if (x2 >= 2) { MoveForward2 = false; }
+		if (x2 <= -2) { MoveForward2 = true; }
+
+		cubePos.z = x2;
+		cubePos.y = x2 * 2;
+		*/
 		//Get their uniform location
 		GLint modelLoc = glGetUniformLocation(lightingShader.Program, "model");
 		GLint viewLoc = glGetUniformLocation(lightingShader.Program, "view");
@@ -231,30 +260,30 @@ int main()
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 		//Draw the container using its vertex attributes
-		glBindVertexArray(boxVAO);
+		glBindVertexArray(containerVAO);
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, cubePos);
+		//model = glm::translate(model, cubePos);
 		//model = glm::scale(model, glm::vec3(0.2f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 
 		//--------------------
-		/*
+		
 		if (MoveForward) 
 		{
-			x += 8.0f * deltaTime;
+			x += 1.0f * deltaTime;
 		}
 		else 
 		{
-			x -= 8.0f * deltaTime;
+			x -= 1.0f * deltaTime;
 		}
 
 		if (x >= 2) { MoveForward = false; }
 		if (x <= -2) {MoveForward = true; }
 
 		lightPos.z = x;
-		*/
+		
 		//std::cout << lightPos.z << std::endl;
 		//std::cout << lightPos.y << std::endl;
 		//Draw lamp object, bind the appropriate shader
@@ -285,7 +314,7 @@ int main()
 	}
 
 	//De-allocate all resources 
-	glDeleteVertexArrays(1, &boxVAO);
+	glDeleteVertexArrays(1, &containerVAO);
 	glDeleteVertexArrays(1, &lightVAO);
 	glDeleteBuffers(1, &VBO);
 
