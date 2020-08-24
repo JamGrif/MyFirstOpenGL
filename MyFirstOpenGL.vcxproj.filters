@@ -24,6 +24,12 @@
     <Image Include="res\textures\cowboy.jpg">
       <Filter>res\textures</Filter>
     </Image>
+    <Image Include="res\textures\container2.png">
+      <Filter>res\textures</Filter>
+    </Image>
+    <Image Include="res\textures\container2_specular.png">
+      <Filter>res\textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyFirstOpenGL.cpp">

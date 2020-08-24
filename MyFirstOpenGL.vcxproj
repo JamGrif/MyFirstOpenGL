@@ -145,6 +145,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Image Include="Data\images\image3.jpg" />
+    <Image Include="res\textures\container2.png" />
+    <Image Include="res\textures\container2_specular.png" />
     <Image Include="res\textures\cowboy.jpg" />
     <Image Include="res\textures\Crate.jpg" />
   </ItemGroup>
