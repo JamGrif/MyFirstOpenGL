@@ -41,7 +41,7 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
-//glm::vec3 cubePos(0.0f, 0.0f, 0.0f);
+glm::vec3 cubePos(0.0f, 0.0f, 0.0f);
 //Position of the source of light in world
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
@@ -109,7 +109,6 @@ int main()
 	//Build and compile the shader programs
 	Shader lightingShader("res/shaders/lighting.vs", "res/shaders/lighting.frag");
 	Shader lampShader("res/shaders/lamp.vs", "res/shaders/lamp.frag");
-
 
 	// Set up our vertex data (and buffer(s)) and attribute pointers
 	GLfloat vertices[] =
@@ -201,7 +200,7 @@ int main()
 	float x2 = 0;
 	bool MoveForward = true;
 	bool MoveForward2 = false;
-
+	
 	//Game loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -219,29 +218,41 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Clear out window, ready to draw next frame
 
 		lightingShader.Use();
-		GLint objectColorLoc = glGetUniformLocation( lightingShader.Program, "objectColor" );
-        GLint lightColorLoc = glGetUniformLocation( lightingShader.Program, "lightColor" );
-        GLint lightPosLoc = glGetUniformLocation( lightingShader.Program, "lightPos" );
+        GLint lightPosLoc = glGetUniformLocation( lightingShader.Program, "light.position" );
         GLint viewPosLoc = glGetUniformLocation( lightingShader.Program, "viewPos" );
 
 		//Uniforming the objects colour location
-		glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
 		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
 		glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
 
+		//Set lights properties
+		glm::vec3 lightColor;
+		lightColor.r = sin(glfwGetTime() * 2.0f);
+		lightColor.g = sin(glfwGetTime() * 0.7f);
+		lightColor.b = sin(glfwGetTime() * 1.3f);
+		glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f); //Decrease the influence
+		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); //Low influence
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "light.ambient"), ambientColor.r, ambientColor.g, ambientColor.b);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "light.diffuse"), diffuseColor.r, diffuseColor.g, diffuseColor.b);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "light.specular"), 1.0f, 1.0f, 1.0f);
+
+		//Set material properties
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 1.0f, 0.5f, 0.31f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 1.0f, 0.5f, 0.31f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 0.5f, 0.5f, 0.5f);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 32.0f);
 
 		//Create transformations
 		glm::mat4 view = glm::mat4(1.0f);
 		view = camera.GetViewMatrix();
-
-		/*if (MoveForward2)
+		/*
+		if (MoveForward2)
 		{
-			x2 += 3.0f * deltaTime;
+			x2 += 1.0f * deltaTime;
 		}
 		else
 		{
-			x2 -= 3.0f * deltaTime;
+			x2 -= 1.0f * deltaTime;
 		}
 
 		if (x2 >= 2) { MoveForward2 = false; }
@@ -250,6 +261,7 @@ int main()
 		cubePos.z = x2;
 		cubePos.y = x2 * 2;
 		*/
+
 		//Get their uniform location
 		GLint modelLoc = glGetUniformLocation(lightingShader.Program, "model");
 		GLint viewLoc = glGetUniformLocation(lightingShader.Program, "view");
@@ -262,7 +274,7 @@ int main()
 		//Draw the container using its vertex attributes
 		glBindVertexArray(containerVAO);
 		glm::mat4 model = glm::mat4(1.0f);
-		//model = glm::translate(model, cubePos);
+		model = glm::translate(model, cubePos);
 		//model = glm::scale(model, glm::vec3(0.2f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -272,11 +284,11 @@ int main()
 		
 		if (MoveForward) 
 		{
-			x += 1.0f * deltaTime;
+			x += 1.5f * deltaTime;
 		}
 		else 
 		{
-			x -= 1.0f * deltaTime;
+			x -= 1.5f * deltaTime;
 		}
 
 		if (x >= 2) { MoveForward = false; }
