@@ -10,10 +10,15 @@ struct Material
 struct Light
 {
     vec3 position;
+    //vec3 direction;
 
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+
+    float constant;
+    float linear;
+    float quadratic;
 };
 
 out vec4 color;
@@ -34,24 +39,35 @@ uniform Light light;
 //Takes into account direction and normal of the light
 
 //Specular
-//Little shiny light shining off an object
+//Little shiny light shining off an object+
+
+//Attenuation
+//Attenuation lighting is a decrease in lighting as you move away from an object
 
 void main()
 {
     //Ambient
-    vec3 ambient = light.ambient * vec3(texture(material.diffuse,TexCoords));
+    vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
 
     //Diffuse
     vec3 norm = normalize(Normal);
     vec3 lightDir = normalize(light.position - FragPos); //Tell you the direction the light is pointing
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords)); 
+    vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
 
-    //Specular
+    // Specular
     vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));
+
+    // Attenuation
+    float distance    = length(light.position - FragPos);
+    float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+
+    ambient  *= attenuation;
+    diffuse  *= attenuation;
+    specular *= attenuation;
 
     color = vec4(ambient + diffuse + specular, 1.0f);
 
