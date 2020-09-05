@@ -89,14 +89,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\GLEW\include;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\GLFW\include;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\SOIL2\include;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\GLEW\include;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\GLFW\include;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\SOIL2\include;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\glm;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\ASSIMP\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\GLEW\lib\Release\Win32;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\GLFW\lib-vc2015;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\SOIL2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;soil2-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\GLEW\lib\Release\Win32;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\GLFW\lib-vc2015;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\SOIL2\lib;C:\Users\jamgr\Desktop\Stuff\OpenGL\ExternalLibraries\ASSIMP\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;soil2-debug.lib;assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -155,13 +155,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\Model.h" />
     <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shaders\cube.frag" />
+    <None Include="res\shaders\cube.vert" />
+    <None Include="res\shaders\skybox.frag" />
+    <None Include="res\shaders\skybox.vert" />
     <None Include="res\shaders\lamp.frag" />
-    <None Include="res\shaders\lamp.vs" />
+    <None Include="res\shaders\lamp.vert" />
     <None Include="res\shaders\lighting.frag" />
-    <None Include="res\shaders\lighting.vs" />
+    <None Include="res\shaders\lighting.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

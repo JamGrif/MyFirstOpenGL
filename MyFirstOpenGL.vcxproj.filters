@@ -43,18 +43,39 @@
     <ClInclude Include="src\Camera.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\lighting.frag">
       <Filter>res\shaders</Filter>
     </None>
-    <None Include="res\shaders\lighting.vs">
-      <Filter>res\shaders</Filter>
-    </None>
     <None Include="res\shaders\lamp.frag">
       <Filter>res\shaders</Filter>
     </None>
-    <None Include="res\shaders\lamp.vs">
+    <None Include="res\shaders\lamp.vert">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\lighting.vert">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\skybox.vert">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\skybox.frag">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\cube.vert">
+      <Filter>res\shaders</Filter>
+    </None>
+    <None Include="res\shaders\cube.frag">
       <Filter>res\shaders</Filter>
     </None>
   </ItemGroup>
